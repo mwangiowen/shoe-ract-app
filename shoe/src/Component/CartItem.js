@@ -14,3 +14,4 @@ const CartItem = ({ item, decrement, increment }) => (
     </div>
   </div>
 );
+export default CartItem

@@ -22,3 +22,4 @@ const ShopItem = ({ item, addToCart }) => (
     </div>
   </div>
 );
+export default ShopItem
