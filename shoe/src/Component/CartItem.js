@@ -2,7 +2,9 @@ const CartItem = ({ item, decrement, increment }) => (
   <div className="cart-item" key={item.id}>
     <div className="left">
       <div className="cart-image">
-        {/* ... (existing code for the cart item image) */}
+        <div className="image-wrapper">
+          <img className="image" src={item.image} alt={item.name} />
+        </div>
       </div>
     </div>
     <div className="right">
@@ -14,4 +16,5 @@ const CartItem = ({ item, decrement, increment }) => (
     </div>
   </div>
 );
-export default CartItem
+
+export default CartItem;

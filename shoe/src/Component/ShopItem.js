@@ -1,7 +1,11 @@
 const ShopItem = ({ item, addToCart }) => (
   <div className="item" key={item.id}>
     <div className="item-block">
-      {/* ... (existing code for the shop item) */}
+      <div className="image-area" style={{ backgroundColor: item.color }}>
+        <img className="image" src={item.image} alt={item.name} />
+      </div>
+      <div className="name">{item.name}</div>
+      <div className="description">{item.description}</div>
       <div className="bottom-area">
         <div className="price">${item.price}</div>
         <div
@@ -22,4 +26,5 @@ const ShopItem = ({ item, addToCart }) => (
     </div>
   </div>
 );
-export default ShopItem
+
+export default ShopItem;
