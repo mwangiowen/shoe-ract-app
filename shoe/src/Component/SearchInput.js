@@ -20,7 +20,9 @@ const Search = ({ shopItems, addToCart }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button className="searchButton" onClick={handleSearch}>
+        Search
+      </button>
       <div className="search-results">
         {searchResults.map((item) => (
           <ShopItem key={item.id} item={item} addToCart={addToCart} />

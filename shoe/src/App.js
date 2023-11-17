@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import gsap from "gsap";
+
 import ShopItem from "./Component/ShopItem";
 import CartItem from "./Component/CartItem";
 import Search from "./Component/SearchInput";
