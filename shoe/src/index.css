@@ -1,16 +1,15 @@
-/* Define CSS variables for colors */
 :root {
-  --white: #fff;
-  --yellow: #f6c90e;
+  --white: #ffffff85;
+  --yellow: #0ef6cf;
   --black: #303841;
 }
 
 body {
   font-family: "Rubik", sans-serif;
   color: var(--black);
+  transition: all 0.3s ease-in-out;
 }
 
-/* General styles for the wrapper */
 .wrapper {
   height: 100vh;
   display: flex;
@@ -34,7 +33,7 @@ body {
     transform: translateX(-50%) skewY(-8deg);
     background-color: var(--yellow);
     z-index: -1;
-    animation: wave 8s ease-in-out infinite alternate;
+    animation: wave 8s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
   @keyframes wave {
@@ -48,16 +47,12 @@ body {
   }
 }
 
-/* Styles for the left and right screens */
 .screen {
   background-color: var(--white);
   box-sizing: border-box;
   width: 340px;
   height: 600px;
-  box-shadow: 0 3.2px 2.2px rgba(0, 0, 0, 0.02),
-    0 7px 5.4px rgba(0, 0, 0, 0.028), 0 12.1px 10.1px rgba(0, 0, 0, 0.035),
-    0 19.8px 18.1px rgba(0, 0, 0, 0.042), 0 34.7px 33.8px rgba(0, 0, 0, 0.05),
-    0 81px 81px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   overflow-y: scroll;
   padding: 0 28px;
@@ -88,15 +83,14 @@ body {
     position: relative;
   }
 }
-/* Add this style to constrain the size of the images */
+
 .image {
-  max-width: 100%; /* Adjust as needed */
-  max-height: 100%; /* Adjust as needed */
+  max-width: 100%;
+  max-height: 100%;
   display: block;
-  margin: auto; /* Center the image within its container */
+  margin: auto;
 }
 
-/* Improve input styles */
 input {
   width: 100%;
   padding: 10px;
@@ -109,20 +103,21 @@ input {
 }
 
 input:focus {
-  border-color: #fddb3a; /* Change to your preferred focus color */
+  border-color: #fddb3a;
 }
 
-/* Add this style for the glowing effect */
-.addButton {
-  position: relative;
-  overflow: hidden;
+.addButton,
+.button,
+.searchButton,
+.price-btn {
   cursor: pointer;
 }
 
 .button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: var(--yellow);
+  background: rgb(247, 150, 192);
+  background: radial-gradient(circle, rgba(247, 150, 192, 1) 0%, rgba(118, 174, 241, 1) 100%);
   color: var(--black);
   border: none;
   border-radius: 5px;
@@ -131,37 +126,74 @@ input:focus {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .button:hover {
-  background-color: #fddb3a; /* Lighter yellow on hover */
-  box-shadow: 0 0 10px rgba(246, 201, 14, 0.8);
+  background: transparent;
+  color: #76aef1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.button.addedToCart {
-  background-color: #008CBA; /* Blue, change to your preferred color */
+.button:before,
+.button:after {
+  content: "";
+  position: absolute;
+  height: 0%;
+  width: 1px;
+  box-shadow:
+    -1px -1px 20px 0px rgba(255, 255, 255, 1),
+    -4px -4px 5px 0px rgba(255, 255, 255, 1),
+    7px 7px 20px 0px rgba(0, 0, 0, .4),
+    4px 4px 5px 0px rgba(0, 0, 0, .3);
+  transition: all 500ms ease;
 }
 
-/* Add glowing effect to button text */
+.button:before {
+  right: 0;
+  top: 0;
+}
+
+.button:after {
+  left: 0;
+  bottom: 0;
+}
+
+.button:hover:before,
+.button:hover:after {
+  height: 100%;
+}
+
 .buttonText {
   position: relative;
   z-index: 1;
-  animation: glow 1.5s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
   0% {
-    text-shadow: 0 0 5px var(--yellow);
+    text-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow), 0 0 30px var(--yellow);
+  }
+  25% {
+    text-shadow: 0 0 30px var(--yellow), 0 0 20px var(--yellow), 0 0 10px var(--yellow);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--yellow), 0 0 30px var(--yellow), 0 0 10px var(--yellow);
+  }
+  75% {
+    text-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow), 0 0 30px var(--yellow);
   }
   100% {
-    text-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+    text-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow), 0 0 30px var(--yellow);
   }
 }
-/* Add this style for the search button */
+
+.button:hover .buttonText {
+  animation: none; /* Stop the animation on hover */
+}
+
 .searchButton {
   display: inline-block;
   padding: 10px 15px;
@@ -172,13 +204,85 @@ input:focus {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  cursor: pointer;
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .searchButton:hover {
-  background-color: #fddb3a; /* Lighter yellow on hover */
+  background-color: #fddb3a;
   box-shadow: 0 0 10px rgba(246, 201, 14, 0.8);
 }
 
-/* Rest of your CSS... */
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.name,
+.description {
+  line-height: 1.5;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .name {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
+
+.price-btn {
+  position: relative;
+  border: none;
+  box-shadow: none;
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  -webkit-perspective: 100px; /* Adjust as needed */
+  perspective: 100px; /* Adjust as needed */
+}
+
+.price-btn span {
+  background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+  display: block;
+  position: absolute;
+  width: 130px;
+  height: 40px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin: 0;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.price-btn span:nth-child(1) {
+  box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+  transform: rotateX(90deg);
+  transform-origin: 50% 50% -20px;
+}
+
+.price-btn span:nth-child(2) {
+  transform: rotateX(0deg);
+  transform-origin: 50% 50% -20px;
+}
+
+.price-btn:hover span:nth-child(1),
+.price-btn:hover span:nth-child(2) {
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  transform: rotateX(0deg);
+}

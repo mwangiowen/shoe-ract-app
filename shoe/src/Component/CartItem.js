@@ -1,3 +1,22 @@
+import React, { useState } from "react";
+
+const PriceButton = ({ price }) => {
+  const [showPrice, setShowPrice] = useState(false);
+
+  const handleClick = () => {
+    // Toggle between "Price" and actual price
+    setShowPrice((prevShowPrice) => !prevShowPrice);
+  };
+
+  return (
+    <button className="price-btn" onClick={handleClick}>
+      <span className={showPrice ? "flipped" : ""}>
+        {showPrice ? "Price" : `$${price}`}
+      </span>
+    </button>
+  );
+};
+
 const CartItem = ({ item, decrement, increment }) => (
   <div className="cart-item" key={item.id}>
     <div className="left">
@@ -9,7 +28,10 @@ const CartItem = ({ item, decrement, increment }) => (
     </div>
     <div className="right">
       <div className="name">{item.name}</div>
-      <div className="price">${item.price}</div>
+      <div className="price">
+        {/* Integrate the price button here */}
+        <PriceButton price={item.price} />
+      </div>
       <div className="count">
         {/* ... (existing code for the item count) */}
       </div>
