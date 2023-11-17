@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ShopItem from "./ShopItem";
 
 const Search = ({ shopItems, addToCart }) => {
   const [searchTerm, setSearchTerm] = useState("");
